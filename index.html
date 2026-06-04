@@ -99,7 +99,7 @@
         <div class="hstat"><b data-count="25">0</b><span>циклов морозостойкости<br><i>при норме 10</i></span></div>
         <div class="hstat"><b data-count="11">0</b><span>% водопоглощение<br><i>у газоблока — 80%</i></span></div>
         <div class="hstat"><b data-count="8" data-prefix="×">0</b><span>срок службы<br><i>выше аналогов</i></span></div>
-        <div class="hstat hstat--price"><b>от 3500<small>₽/м³</small></b><span>с доставкой<br><i>на объект</i></span></div>
+        <div class="hstat hstat--price"><b><em class="hstat__pre">от</em>3500&#8201;<small>₽/м³</small></b><span>с доставкой<br><i>на объект</i></span></div>
       </div>
     </div>
   </div>
@@ -186,22 +186,22 @@
 
     <div class="adv__row">
       <div class="mini reveal">
-        <div class="mini__icon">❄️</div>
+        <div class="mini__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="m8.5 4.5 3.5 3 3.5-3"/><path d="m8.5 19.5 3.5-3 3.5 3"/><path d="M3.34 7 20.66 17"/><path d="m4.7 11.2.6-3.86 3.86.6"/><path d="m19.3 12.8-.6 3.86-3.86-.6"/><path d="M3.34 17 20.66 7"/><path d="m8.16 5.74-3.86.6.6 3.86"/><path d="m15.84 18.26 3.86-.6-.6-3.86"/></svg></div>
         <h4>Морозостойкость 25 циклов</h4>
         <p>Выдерживает 25 циклов заморозки-разморозки при норме всего в 10.</p>
       </div>
       <div class="mini reveal">
-        <div class="mini__icon">💧</div>
+        <div class="mini__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.7s6.5 6.9 6.5 11.3a6.5 6.5 0 0 1-13 0C5.5 9.6 12 2.7 12 2.7Z"/><path d="m9.3 13.6 1.9 1.9 3.4-3.6"/></svg></div>
         <h4>Водопоглощение 11%</h4>
         <p>У газоблока — до 80%. Блок не подвержен гниению, срок жизни выше в 8 раз.</p>
       </div>
       <div class="mini reveal">
-        <div class="mini__icon">📉</div>
+        <div class="mini__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6l6 6 3.5-3.5L21 17"/><path d="M21 12.5V17h-4.5"/></svg></div>
         <h4>Ниже затраты и сроки</h4>
         <p>Сокращение сроков строительства и снижение сметы по сравнению с аналогами.</p>
       </div>
       <div class="mini reveal">
-        <div class="mini__icon">🌿</div>
+        <div class="mini__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 20.5C3 16 4.5 7.5 12.5 5.5c2.8-.7 5-.5 6.5-1 .4 4.2-.3 12-7.5 14-3 .85-5.5.4-7-.5Z"/><path d="M5 20c2.5-6 6-9 11-10.5"/></svg></div>
         <h4>Экосырьё</h4>
         <p>Природная вулканическая порода. Легко пилится, сверлится и шлифуется.</p>
       </div>
@@ -217,7 +217,8 @@
       <h2 class="h2 reveal">Теплоблок против привычных материалов</h2>
       <p class="section__lead reveal">Наглядно — где теплоблок выигрывает у газоблока, керамзитоблока и кирпича.</p>
     </div>
-    <div class="compare__table reveal">
+    <div class="compare__frame reveal">
+      <div class="compare__scroll" id="compareScroll">
       <div class="ctable">
         <div class="ctable__head">
           <div class="ctable__cell ctable__param">Показатель</div>
@@ -262,6 +263,11 @@
           <div class="ctable__cell">высокие</div>
         </div>
       </div>
+      </div>
+      <span class="compare__hint" id="compareHint">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+        Листайте таблицу, чтобы сравнить
+      </span>
     </div>
     <p class="compare__note reveal">Показатели приведены по характеристикам продукции и общедоступным данным по материалам-аналогам; могут отличаться для конкретных марок.</p>
   </div>

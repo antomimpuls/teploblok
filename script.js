@@ -195,6 +195,21 @@
     });
   }
 
+  /* ---------- ТАБЛИЦА СРАВНЕНИЯ: подсказка скролла ---------- */
+  const cScroll = $('#compareScroll'), cFrame = $('.compare__frame'), cHint = $('#compareHint');
+  if (cScroll && cFrame) {
+    const updateMore = () => {
+      const more = cScroll.scrollLeft + cScroll.clientWidth < cScroll.scrollWidth - 4;
+      cFrame.classList.toggle('has-more', more);
+    };
+    updateMore();
+    addEventListener('resize', updateMore, { passive: true });
+    cScroll.addEventListener('scroll', () => {
+      updateMore();
+      if (cHint && cScroll.scrollLeft > 12) cHint.classList.add('hide');
+    }, { passive: true });
+  }
+
   /* ---------- COOKIE-БАННЕР ---------- */
   const cookie = $('#cookie');
   if (cookie && !localStorage.getItem('cookieOk')) {
