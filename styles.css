@@ -243,41 +243,44 @@ body.cursor-ready a,body.cursor-ready button{cursor:none}
 
 /* ---------- СРАВНЕНИЕ ---------- */
 .compare{background:var(--bg)}
-.compare__frame{position:relative;border-radius:var(--radius-lg);border:1px solid var(--line);overflow:hidden}
-.compare__scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity}
-.compare__scroll::-webkit-scrollbar{height:6px}
-.compare__scroll::-webkit-scrollbar-thumb{background:var(--line-2);border-radius:6px}
-/* затухание справа — намёк, что есть продолжение */
-.compare__frame::after{content:"";position:absolute;top:0;right:0;bottom:0;width:54px;pointer-events:none;
-  background:linear-gradient(90deg,transparent,var(--bg-2));opacity:0;transition:opacity .3s;z-index:3}
-.compare__frame.has-more::after{opacity:1}
-.ctable{min-width:760px}
-.ctable__head,.ctable__row{display:grid;grid-template-columns:1.4fr 1.2fr 1fr 1fr 1fr}
-.ctable__head{background:var(--bg-3)}
-.ctable__cell{padding:20px 22px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);
-  font-size:15px;display:flex;align-items:center;scroll-snap-align:start}
-.ctable__cell:last-child{border-right:none}
-.ctable__head .ctable__cell{font-weight:700;font-family:var(--display);font-size:14px;color:var(--muted)}
-/* липкий первый столбец — параметр всегда виден при горизонтальном скролле */
-.ctable__param{color:var(--muted);font-weight:600;position:sticky;left:0;z-index:2;
-  background:var(--bg-3);box-shadow:8px 0 16px -10px rgba(0,0,0,.7)}
-.ctable__head .ctable__param{background:var(--bg-3)}
-.ctable__win{background:rgba(232,137,58,.08);position:relative}
-.ctable__head .ctable__win{color:var(--accent-2)}
-.ctable__win b{color:var(--accent-2);font-weight:700}
-.ctable__row:hover .ctable__cell{background:rgba(255,255,255,.02)}
-.ctable__row:hover .ctable__param{background:var(--surface)}
-.ctable__row:hover .ctable__win{background:rgba(232,137,58,.13)}
-/* подсказка «листайте» */
-.compare__hint{display:none;align-items:center;justify-content:center;gap:8px;margin:14px auto 0;
-  padding:9px 18px;border-radius:100px;font-size:13px;font-weight:600;color:var(--accent-2);
-  background:rgba(232,137,58,.1);border:1px solid var(--accent);width:max-content;
-  transition:opacity .4s,transform .4s}
-.compare__hint svg{animation:hintarrow 1.4s ease-in-out infinite}
-@keyframes hintarrow{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
-.compare__hint.hide{opacity:0;transform:translateY(-6px);pointer-events:none}
+/* ----- ДЕСКТОП: таблица ----- */
+.cmp{border-radius:var(--radius-lg);border:1px solid var(--line);overflow:hidden}
+.cmp__head,.cmp__row{display:grid;grid-template-columns:1.5fr 1.2fr 1fr 1.1fr 1fr}
+.cmp__head{background:var(--bg-3)}
+.cmp__hcell{padding:18px 22px;font-family:var(--display);font-weight:700;font-size:14px;color:var(--muted);
+  border-right:1px solid var(--line);display:flex;align-items:center}
+.cmp__hcell:last-child{border-right:none}
+.cmp__hcell--win{color:var(--accent-2)}
+.cmp__row{border-top:1px solid var(--line)}
+.cmp__param,.cmp__val{padding:18px 22px;border-right:1px solid var(--line);font-size:15px;
+  display:flex;align-items:center}
+.cmp__val:last-child{border-right:none}
+.cmp__param{color:var(--muted);font-weight:600;background:var(--bg-3)}
+.cmp__val--win{background:rgba(232,137,58,.08);color:var(--accent-2);font-weight:700}
+.cmp__row:hover .cmp__val{background:rgba(255,255,255,.02)}
+.cmp__row:hover .cmp__val--win{background:rgba(232,137,58,.13)}
+.cmp__row:hover .cmp__param{background:var(--surface)}
 .compare__note{color:var(--muted-2);font-size:13px;margin-top:18px;max-width:760px}
-@media (max-width:760px){.compare__hint{display:inline-flex}}
+
+/* ----- МОБИЛЬНЫЙ: карточки по параметрам, без скролла ----- */
+@media (max-width:760px){
+  .cmp{display:grid;gap:14px;border:none;border-radius:0;overflow:visible}
+  .cmp__head{display:none}
+  .cmp__row{display:block;border:1px solid var(--line);border-radius:18px;background:var(--bg-3);
+    padding:20px 18px 10px}
+  .cmp__param{display:block;padding:0 0 12px;background:none;border:none;
+    font-family:var(--display);font-weight:700;font-size:18px;color:var(--text)}
+  .cmp__val{display:flex;justify-content:space-between;align-items:center;gap:14px;
+    padding:12px 0;border:none;border-top:1px solid var(--line);font-size:15px;color:var(--text)}
+  .cmp__val::before{content:attr(data-m);color:var(--muted);font-weight:500}
+  /* «Теплоблок» — выделенная плашка-победитель сверху карточки */
+  .cmp__val--win{margin:0 -18px 10px;padding:14px 18px;border-radius:12px;border:none;
+    background:linear-gradient(120deg,rgba(232,137,58,.18),rgba(232,137,58,.06));
+    font-size:17px;font-weight:800;color:var(--accent-2)}
+  .cmp__val--win::before{content:attr(data-m) " ✦ лучший";color:var(--accent);
+    font-weight:700;font-size:12px;letter-spacing:.02em}
+  .cmp__val:not(.cmp__val--win)+.cmp__val--win{margin-top:0}
+}
 
 /* ---------- КАТАЛОГ ---------- */
 .catalog{background:var(--bg-2)}
@@ -487,6 +490,9 @@ body.cursor-ready a,body.cursor-ready button{cursor:none}
   .section{padding:84px 0}
   .hero__scroll{display:none}                 /* не наезжает на статистику */
   .hero{min-height:auto}
+  /* карточки статистики — плотный фон, чтобы текст читался поверх фото */
+  .hstat{background:rgba(28,23,18,.7);backdrop-filter:blur(12px)}
+  .hstat span i{color:var(--muted)}
   /* читаемость текста поверх фото на мобильном — затемняем сильнее и вертикально */
   .cta::before{background:linear-gradient(180deg,rgba(21,17,13,.82),rgba(21,17,13,.94))}
 }
@@ -494,7 +500,11 @@ body.cursor-ready a,body.cursor-ready button{cursor:none}
   .container{padding:0 20px}
   .adv__grid,.adv__row,.catalog__grid,.steps,.footer__grid,.gallery__grid{grid-template-columns:1fr}
   .gitem--big{grid-column:span 1;grid-row:span 1}
-  .hero__stats{grid-template-columns:1fr 1fr}
+  .hero__stats{grid-template-columns:1fr 1fr;gap:10px}
+  .hstat{padding:18px 15px}
+  .hstat b{font-size:30px}
+  .hstat--price b{font-size:25px}        /* цена помещается в карточку, не обрезается */
+  .hstat--price small{font-size:.46em}
   .lead,.modal__box{padding:26px}
   .cookie{left:14px;right:14px;bottom:14px;max-width:none}
   .audience{flex-direction:column;align-items:flex-start}
