@@ -94,7 +94,15 @@
   const closeModal = () => { modal.classList.remove('open'); document.body.classList.remove('no-scroll'); };
   $$('.js-open-modal').forEach(b => b.addEventListener('click', openModal));
   $$('.js-close-modal').forEach(b => b.addEventListener('click', closeModal));
-  addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  /* ---------- МОДАЛКА КОНТАКТОВ (быстрый звонок) ---------- */
+  const callModal = $('#callModal');
+  const openCall = () => { callModal.classList.add('open'); document.body.classList.add('no-scroll'); };
+  const closeCall = () => { callModal.classList.remove('open'); document.body.classList.remove('no-scroll'); };
+  $$('.js-call').forEach(b => b.addEventListener('click', e => { e.preventDefault(); openCall(); }));
+  $$('.js-close-call').forEach(b => b.addEventListener('click', closeCall));
+
+  addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeCall(); } });
 
   /* ---------- ОТПРАВКА ФОРМ ----------
      Заявка уходит в WhatsApp с уже заполненными данными (без бэкенда).

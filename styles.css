@@ -417,6 +417,31 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .modal__success h3{font-family:var(--display);font-weight:700;font-size:24px;margin-bottom:10px}
 .modal__success p{color:var(--muted);margin-bottom:22px}
 
+/* ---------- МОДАЛКА КОНТАКТОВ ---------- */
+.modal__box--call{max-width:430px}
+.callm__head{margin-bottom:24px}
+.callm__head h3{font-family:var(--display);font-weight:700;font-size:25px;margin:6px 0 8px}
+.callm__head p{color:var(--muted);font-size:14px}
+.callm__btn{display:flex;align-items:center;gap:16px;padding:15px 16px;border-radius:16px;
+  border:1px solid var(--line-2);background:rgba(255,255,255,.02);margin-bottom:12px;
+  transition:transform .35s var(--ease),border-color .35s,background .35s}
+.callm__btn:last-child{margin-bottom:0}
+.callm__btn:hover{transform:translateY(-2px);border-color:var(--accent);background:rgba(232,137,58,.06)}
+.callm__btn:active{transform:scale(.99)}
+.callm__ic{width:50px;height:50px;border-radius:14px;flex:0 0 auto;display:flex;align-items:center;
+  justify-content:center;color:#fff}
+.callm__ic svg{width:26px;height:26px}
+.callm__btn--call .callm__ic{background:linear-gradient(135deg,var(--accent),var(--accent-deep));color:#1a120a;
+  box-shadow:0 8px 20px -6px var(--glow)}
+.callm__btn--wa .callm__ic{background:linear-gradient(135deg,#25d366,#15a850)}
+.callm__btn--tg .callm__ic{background:linear-gradient(135deg,#2aabee,#1d8fd1)}
+.callm__txt{flex:1;display:flex;flex-direction:column;line-height:1.2;min-width:0}
+.callm__txt b{font-size:16.5px;font-weight:700}
+.callm__txt i{font-style:normal;font-size:13px;color:var(--muted);margin-top:3px}
+.callm__arr{color:var(--muted-2);flex:0 0 auto;display:flex;transition:transform .3s,color .3s}
+.callm__btn:hover .callm__arr{transform:translateX(4px);color:var(--accent-2)}
+.callm__btn--call:hover .callm__arr{color:var(--accent-2)}
+
 /* ---------- COOKIE ---------- */
 .cookie{position:fixed;left:26px;bottom:26px;z-index:950;max-width:420px;display:flex;align-items:center;
   gap:18px;padding:18px 22px;border-radius:16px;background:var(--surface);border:1px solid var(--line-2);
