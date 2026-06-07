@@ -154,13 +154,14 @@ body.cursor-ready a,body.cursor-ready button{cursor:none}
 .pulse-dot::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:1px solid var(--accent);
   animation:pulse 2s ease-out infinite}
 @keyframes pulse{0%{transform:scale(.6);opacity:1}100%{transform:scale(1.8);opacity:0}}
-.hero__title{font-family:var(--display);font-weight:800;font-size:clamp(40px,7.2vw,88px);line-height:.98;
-  letter-spacing:-.03em;margin-bottom:26px}
+.hero__title{font-family:var(--display);font-weight:800;font-size:clamp(26px,8.5vw,74px);line-height:1;
+  letter-spacing:-.035em;margin-bottom:26px}
 .hero__title em{font-style:normal;color:var(--accent);position:relative}
 .reveal-line{display:block;overflow:hidden}
 .reveal-line>span{display:block;transform:translateY(110%);transition:transform .9s var(--ease)}
 .hero.in .reveal-line:nth-child(1)>span{transition-delay:.15s}
 .hero.in .reveal-line:nth-child(2)>span{transition-delay:.3s}
+.hero.in .reveal-line:nth-child(3)>span{transition-delay:.45s}
 .hero.in .reveal-line>span{transform:translateY(0)}
 .hero__sub{font-size:clamp(16px,1.9vw,20px);color:var(--muted);max-width:600px;margin-bottom:38px}
 .hero__cta{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:60px}
