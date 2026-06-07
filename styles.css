@@ -89,18 +89,6 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .preloader__bar i{display:block;height:100%;width:0;background:var(--accent);animation:load 1.6s ease forwards}
 @keyframes load{to{width:100%}}
 
-/* ---------- КУРСОР ---------- */
-.cursor,.cursor-dot{position:fixed;top:0;left:0;border-radius:50%;pointer-events:none;z-index:9000;
-  transform:translate(-50%,-50%);mix-blend-mode:difference}
-.cursor{width:34px;height:34px;border:1.5px solid #fff;transition:width .3s,height .3s,background .3s,opacity .3s}
-.cursor-dot{width:5px;height:5px;background:#fff;transition:opacity .3s}
-.cursor.is-link{width:54px;height:54px;background:#fff;border-color:#fff}
-.cursor.is-zoom{width:74px;height:74px;background:#fff}
-.cursor.is-zoom::after{content:"смотреть";color:#000;font-size:11px;font-weight:700;mix-blend-mode:normal}
-body.cursor-ready{cursor:none}
-body.cursor-ready a,body.cursor-ready button{cursor:none}
-@media (hover:none){.cursor,.cursor-dot{display:none}}
-
 /* ---------- ПРОГРЕСС СКРОЛЛА ---------- */
 .scroll-progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:8000;
   background:linear-gradient(90deg,var(--accent),var(--accent-2));box-shadow:0 0 12px var(--glow)}
@@ -177,14 +165,6 @@ body.cursor-ready a,body.cursor-ready button{cursor:none}
 .hstat--price b{color:var(--text);font-size:clamp(24px,3.1vw,34px)}
 .hstat__pre{font-style:normal;font-size:.5em;color:var(--muted);font-weight:600;margin-right:.35em;vertical-align:middle}
 .hstat--price small{font-size:.42em;color:var(--accent-2);font-weight:600}
-.hero__scroll{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:3;
-  display:flex;flex-direction:column;align-items:center;gap:10px;font-size:11px;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--muted-2)}
-.hero__scroll span{width:24px;height:38px;border:1.5px solid var(--line-2);border-radius:14px;position:relative}
-.hero__scroll span::after{content:"";position:absolute;top:7px;left:50%;transform:translateX(-50%);
-  width:4px;height:8px;border-radius:3px;background:var(--accent);animation:scroll 1.8s ease infinite}
-@keyframes scroll{0%{opacity:0;transform:translate(-50%,0)}40%{opacity:1}80%{opacity:0;transform:translate(-50%,14px)}}
-
 /* ---------- БЕГУЩАЯ СТРОКА ---------- */
 .marquee{padding:26px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
   background:var(--bg-2);overflow:hidden;white-space:nowrap}
@@ -491,7 +471,6 @@ body.cursor-ready a,body.cursor-ready button{cursor:none}
   .about__img img{height:380px}
   .hero__stats{grid-template-columns:repeat(2,1fr)}
   .section{padding:84px 0}
-  .hero__scroll{display:none}                 /* не наезжает на статистику */
   .hero{min-height:auto}
   /* карточки статистики — плотный фон, чтобы текст читался поверх фото */
   .hstat{background:rgba(28,23,18,.7);backdrop-filter:blur(12px)}

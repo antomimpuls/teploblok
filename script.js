@@ -72,33 +72,6 @@
   }, { threshold: 0.6 });
   $$('[data-count]').forEach(el => countIO.observe(el));
 
-  /* ---------- КАСТОМНЫЙ КУРСОР ---------- */
-  if (!matchMedia('(hover:none)').matches && !reduce) {
-    const cur = $('#cursor'), dot = $('#cursorDot');
-    document.body.classList.add('cursor-ready');
-    let cx = innerWidth / 2, cy = innerHeight / 2, x = cx, y = cy;
-    addEventListener('mousemove', e => {
-      cx = e.clientX; cy = e.clientY;
-      dot.style.transform = `translate(${cx}px,${cy}px) translate(-50%,-50%)`;
-    });
-    const loop = () => {
-      x += (cx - x) * 0.18; y += (cy - y) * 0.18;
-      cur.style.transform = `translate(${x}px,${y}px) translate(-50%,-50%)`;
-      requestAnimationFrame(loop);
-    };
-    loop();
-    const bind = () => {
-      $$('a,button,[data-cursor]').forEach(el => {
-        const type = el.dataset.cursor;
-        el.addEventListener('mouseenter', () => {
-          cur.classList.add(type === 'zoom' ? 'is-zoom' : 'is-link');
-        });
-        el.addEventListener('mouseleave', () => cur.classList.remove('is-link', 'is-zoom'));
-      });
-    };
-    bind();
-  }
-
   /* ---------- TILT (лёгкий 3D на карточках) ---------- */
   if (!matchMedia('(hover:none)').matches && !reduce) {
     $$('[data-tilt]').forEach(el => {
