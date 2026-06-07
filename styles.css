@@ -401,6 +401,8 @@ body.cursor-ready a,body.cursor-ready button{cursor:none}
   display:flex;align-items:center;justify-content:center;box-shadow:0 14px 36px -8px var(--glow);
   transition:transform .4s var(--ease)}
 .fab:hover{transform:scale(1.08) rotate(8deg)}
+.fab--wa{background:linear-gradient(135deg,#25d366,#15a850);color:#fff}
+.fab--wa .fab__pulse{border-color:#25d366}
 .fab__pulse{position:absolute;inset:0;border-radius:50%;border:2px solid var(--accent);
   animation:fabpulse 2.2s ease-out infinite}
 @keyframes fabpulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.7);opacity:0}}

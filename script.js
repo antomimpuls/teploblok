@@ -124,31 +124,27 @@
   addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
   /* ---------- ОТПРАВКА ФОРМ ----------
-     Сейчас форма имитирует успешную отправку (без бэкенда).
-     Подключение реальной отправки — см. README.md (раздел «Формы»). */
-  const sendLead = (data) => {
-    // TODO: заменить на реальную отправку (Formspree / Telegram-бот / CRM / почта).
-    console.log('Заявка (демо):', data);
-    return new Promise(res => setTimeout(res, 600));
+     Заявка уходит в WhatsApp с уже заполненными данными (без бэкенда).
+     Чтобы заявки приходили автоматически в Telegram — нужен бот (см. README.md). */
+  const WA_NUMBER = '79530857007';
+  const sendLeadWhatsApp = (data) => {
+    const lines = ['Заявка с сайта «Теплоблок»:', 'Имя: ' + (data.name || '—'), 'Телефон: ' + (data.phone || '—')];
+    if (data.comment) lines.push('Что строят / объём: ' + data.comment);
+    window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(lines.join('\n')), '_blank');
   };
   $$('.js-lead').forEach(form => {
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener('submit', (e) => {
       e.preventDefault();
       const phone = form.querySelector('[name=phone]');
       const consent = form.querySelector('[name=consent]');
       if (phone && phone.value.replace(/\D/g, '').length < 10) { phone.focus(); shake(phone); return; }
       if (consent && !consent.checked) { shake(consent.closest('.consent')); return; }
-      const btn = form.querySelector('button[type=submit]');
-      const orig = btn.textContent; btn.textContent = 'Отправляем…'; btn.disabled = true;
       const data = Object.fromEntries(new FormData(form).entries());
-      await sendLead(data);
-      btn.textContent = orig; btn.disabled = false; form.reset();
+      sendLeadWhatsApp(data);            // открываем WhatsApp с заполненной заявкой (в рамках клика)
+      form.reset();
       const consentBox = form.querySelector('[name=consent]'); if (consentBox) consentBox.checked = true;
-      if (form.classList.contains('lead--modal')) {
-        modal.classList.add('success');
-      } else {
-        toast('Заявка отправлена! Мы свяжемся с вами в ближайшее время.');
-      }
+      if (form.classList.contains('lead--modal')) modal.classList.add('success');
+      else toast('Открываем WhatsApp — отправьте сообщение, и мы свяжемся с вами!');
     });
   });
   function shake(el) {
