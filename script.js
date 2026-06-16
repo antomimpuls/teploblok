@@ -144,7 +144,7 @@
   }
 
   /* ---------- ЛАЙТБОКС ГАЛЕРЕИ ---------- */
-  const gItems = $$('.gitem');
+  const gItems = $$('.gitem, .cert__item');
   if (gItems.length) {
     const lb = document.createElement('div');
     lb.className = 'lightbox';

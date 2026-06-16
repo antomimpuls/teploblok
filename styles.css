@@ -298,6 +298,21 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   transform:translateY(6px);opacity:.85;transition:.4s var(--ease)}
 .gitem:hover .gitem__cap{transform:translateY(0);opacity:1}
 
+/* ---------- СЕРТИФИКАТЫ ---------- */
+.certs{background:var(--bg-2)}
+.certs__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.cert__item{position:relative;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);
+  background:var(--bg-3);display:block;transition:transform .4s var(--ease),border-color .4s}
+.cert__item img{width:100%;height:310px;object-fit:cover;object-position:top center;background:#f0ece6;
+  transition:transform .6s var(--ease)}
+.cert__item:hover{border-color:var(--accent);transform:translateY(-5px)}
+.cert__item:hover img{transform:scale(1.03)}
+.cert__item span{position:absolute;left:0;right:0;bottom:0;padding:18px 16px 14px;font-size:13.5px;
+  font-weight:700;background:linear-gradient(to top,rgba(15,11,8,.96),rgba(15,11,8,.6) 60%,transparent);z-index:2}
+.certs__note{color:var(--muted-2);font-size:13px;margin-top:18px}
+@media (max-width:1080px){.certs__grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.certs__grid{gap:12px}.cert__item img{height:240px}}
+
 /* ---------- ДОСТАВКА ---------- */
 .delivery{background:var(--bg-2)}
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
