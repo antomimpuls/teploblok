@@ -105,27 +105,53 @@
   addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeCall(); } });
 
   /* ---------- ОТПРАВКА ФОРМ ----------
-     Заявка уходит в WhatsApp с уже заполненными данными (без бэкенда).
-     Чтобы заявки приходили автоматически в Telegram — нужен бот (см. README.md). */
-  const WA_NUMBER = '79530857007';
-  const sendLeadWhatsApp = (data) => {
-    const lines = ['Заявка с сайта «Теплоблок»:', 'Имя: ' + (data.name || '—'), 'Телефон: ' + (data.phone || '—')];
-    if (data.comment) lines.push('Что строят / объём: ' + data.comment);
-    window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(lines.join('\n')), '_blank');
-  };
+     Заявка уходит НА ПОЧТУ через сервис FormSubmit (без бэкенда).
+     Получатель задаётся в LEAD_ENDPOINT. Если отправка не удалась —
+     предлагаем прямые способы связи, чтобы не потерять клиента. */
+  const LEAD_ENDPOINT = 'https://formsubmit.co/ajax/89530857007@mail.ru';
+
+  async function sendLead(data) {
+    const res = await fetch(LEAD_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        'Имя': data.name || '—',
+        'Телефон': data.phone || '—',
+        'Что строят / объём': data.comment || '—',
+        _subject: 'Новая заявка с сайта vulkanblok.ru',
+        _template: 'table',
+        _captcha: 'false'
+      })
+    });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const json = await res.json();
+    if (!(json && (json.success === 'true' || json.success === true))) throw new Error('not success');
+  }
+
   $$('.js-lead').forEach(form => {
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const phone = form.querySelector('[name=phone]');
       const consent = form.querySelector('[name=consent]');
       if (phone && phone.value.replace(/\D/g, '').length < 10) { phone.focus(); shake(phone); return; }
       if (consent && !consent.checked) { shake(consent.closest('.consent')); return; }
+      const btn = form.querySelector('button[type=submit]');
+      const orig = btn ? btn.textContent : '';
+      if (btn) { btn.disabled = true; btn.textContent = 'Отправляем…'; }
       const data = Object.fromEntries(new FormData(form).entries());
-      sendLeadWhatsApp(data);            // открываем WhatsApp с заполненной заявкой (в рамках клика)
-      form.reset();
-      const consentBox = form.querySelector('[name=consent]'); if (consentBox) consentBox.checked = true;
-      if (form.classList.contains('lead--modal')) modal.classList.add('success');
-      else toast('Открываем WhatsApp — отправьте сообщение, и мы свяжемся с вами!');
+      try {
+        await sendLead(data);
+        form.reset();
+        const cb = form.querySelector('[name=consent]'); if (cb) cb.checked = true;
+        if (form.classList.contains('lead--modal')) modal.classList.add('success');
+        else toast('Заявка отправлена! Мы свяжемся с вами в ближайшее время.');
+      } catch (err) {
+        // не теряем клиента — предлагаем прямые способы связи
+        toast('Не получилось отправить. Позвоните +7 953 085-70-07 или напишите в WhatsApp / Telegram.');
+        if (typeof openCall === 'function') openCall();
+      } finally {
+        if (btn) { btn.disabled = false; btn.textContent = orig; }
+      }
     });
   });
   function shake(el) {
