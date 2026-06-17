@@ -98,27 +98,27 @@
   addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
   /* ---------- ОТПРАВКА ФОРМ ----------
-     Заявка уходит НА ПОЧТУ через сервис FormSubmit (без бэкенда).
-     Получатель задаётся в LEAD_ENDPOINT. Если отправка не удалась —
-     предлагаем прямые способы связи, чтобы не потерять клиента. */
-  const LEAD_ENDPOINT = 'https://formsubmit.co/ajax/89530857007@mail.ru';
+     Заявка уходит НА ПОЧТУ через сервис Web3Forms (без бэкенда, без подтверждения).
+     Получатель привязан к ключу access_key (почта 89530857007@mail.ru).
+     Если отправка не удалась — подсказываем прямые способы связи. */
+  const LEAD_ENDPOINT = 'https://api.web3forms.com/submit';
+  const WEB3_KEY = 'b3ba9fc8-cff8-44c5-a9c6-d9c4373bdac1';
 
   async function sendLead(data) {
     const res = await fetch(LEAD_ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({
+        access_key: WEB3_KEY,
+        subject: 'Новая заявка с сайта vulkanblok.ru',
+        from_name: 'Сайт Теплоблок (vulkanblok.ru)',
         'Имя': data.name || '—',
         'Телефон': data.phone || '—',
-        'Что строят / объём': data.comment || '—',
-        _subject: 'Новая заявка с сайта vulkanblok.ru',
-        _template: 'table',
-        _captcha: 'false'
+        'Что строят / объём': data.comment || '—'
       })
     });
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const json = await res.json();
-    if (!(json && (json.success === 'true' || json.success === true))) throw new Error('not success');
+    const json = await res.json().catch(() => ({}));
+    if (!(res.ok && json && (json.success === true || json.success === 'true'))) throw new Error('not success');
   }
 
   $$('.js-lead').forEach(form => {
