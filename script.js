@@ -95,14 +95,7 @@
   $$('.js-open-modal').forEach(b => b.addEventListener('click', openModal));
   $$('.js-close-modal').forEach(b => b.addEventListener('click', closeModal));
 
-  /* ---------- МОДАЛКА КОНТАКТОВ (быстрый звонок) ---------- */
-  const callModal = $('#callModal');
-  const openCall = () => { callModal.classList.add('open'); document.body.classList.add('no-scroll'); };
-  const closeCall = () => { callModal.classList.remove('open'); document.body.classList.remove('no-scroll'); };
-  $$('.js-call').forEach(b => b.addEventListener('click', e => { e.preventDefault(); openCall(); }));
-  $$('.js-close-call').forEach(b => b.addEventListener('click', closeCall));
-
-  addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeCall(); } });
+  addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
   /* ---------- ОТПРАВКА ФОРМ ----------
      Заявка уходит НА ПОЧТУ через сервис FormSubmit (без бэкенда).
@@ -146,9 +139,8 @@
         if (form.classList.contains('lead--modal')) modal.classList.add('success');
         else toast('Заявка отправлена! Мы свяжемся с вами в ближайшее время.');
       } catch (err) {
-        // не теряем клиента — предлагаем прямые способы связи
-        toast('Не получилось отправить. Позвоните +7 953 085-70-07 или напишите в WhatsApp / Telegram.');
-        if (typeof openCall === 'function') openCall();
+        // не теряем клиента — подсказываем прямые способы связи (кнопки справа внизу)
+        toast('Не получилось отправить. Позвоните +7 953 085-70-07 или напишите в WhatsApp / Telegram (кнопки справа внизу).');
       } finally {
         if (btn) { btn.disabled = false; btn.textContent = orig; }
       }
@@ -201,9 +193,11 @@
   /* ---------- COOKIE-БАННЕР ---------- */
   const cookie = $('#cookie');
   if (cookie && !localStorage.getItem('cookieOk')) {
-    setTimeout(() => cookie.classList.add('show'), 1600);
+    setTimeout(() => { cookie.classList.add('show'); document.body.classList.add('cookie-on'); }, 1600);
     $('#cookieOk')?.addEventListener('click', () => {
-      localStorage.setItem('cookieOk', '1'); cookie.classList.remove('show');
+      localStorage.setItem('cookieOk', '1');
+      cookie.classList.remove('show');
+      document.body.classList.remove('cookie-on');   // кнопки связи опускаются обратно
     });
   }
 

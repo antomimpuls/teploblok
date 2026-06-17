@@ -404,17 +404,25 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .footer__bottom{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
   padding:26px 28px;border-top:1px solid var(--line);color:var(--muted-2);font-size:13px}
 
-/* ---------- ПЛАВАЮЩАЯ КНОПКА ---------- */
-.fab{position:fixed;right:26px;bottom:26px;z-index:900;width:60px;height:60px;border-radius:50%;
-  background:linear-gradient(135deg,var(--accent),var(--accent-deep));color:#1a120a;
-  display:flex;align-items:center;justify-content:center;box-shadow:0 14px 36px -8px var(--glow);
-  transition:transform .4s var(--ease)}
-.fab:hover{transform:scale(1.08) rotate(8deg)}
-.fab--wa{background:linear-gradient(135deg,#25d366,#15a850);color:#fff}
-.fab--wa .fab__pulse{border-color:#25d366}
-.fab__pulse{position:absolute;inset:0;border-radius:50%;border:2px solid var(--accent);
-  animation:fabpulse 2.2s ease-out infinite}
-@keyframes fabpulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.7);opacity:0}}
+/* ---------- ПЛАВАЮЩИЕ КНОПКИ СВЯЗИ (3 отдельные) ---------- */
+.fab-stack{position:fixed;right:16px;bottom:16px;z-index:900;display:flex;flex-direction:column;gap:12px;
+  align-items:flex-end;transition:bottom .4s var(--ease)}
+.fab-btn{position:relative;width:56px;height:56px;border-radius:50%;flex:0 0 auto;
+  display:flex;align-items:center;justify-content:center;color:#fff;
+  box-shadow:0 12px 28px -8px rgba(0,0,0,.55);transition:transform .3s var(--ease),box-shadow .3s}
+.fab-btn svg{width:27px;height:27px}
+.fab-btn:hover{transform:scale(1.1)}
+.fab-btn--call{background:linear-gradient(135deg,var(--accent),var(--accent-deep));color:#1a120a}
+.fab-btn--call svg{width:26px;height:26px}
+.fab-btn--wa{background:linear-gradient(135deg,#25d366,#15a850)}
+.fab-btn--tg{background:linear-gradient(135deg,#2aabee,#1d8fd1)}
+/* подпись слева — на десктопе по наведению, на тач — скрыта */
+.fab-btn__lbl{position:absolute;right:66px;white-space:nowrap;background:var(--surface);
+  border:1px solid var(--line-2);color:var(--text);font-size:13px;font-weight:700;
+  padding:8px 14px;border-radius:100px;box-shadow:0 8px 20px -8px rgba(0,0,0,.5);
+  opacity:0;transform:translateX(8px);pointer-events:none;transition:.3s var(--ease)}
+.fab-btn:hover .fab-btn__lbl{opacity:1;transform:translateX(0)}
+@media (hover:none){.fab-btn__lbl{display:none}}
 
 /* ---------- МОДАЛКА ---------- */
 .modal{position:fixed;inset:0;z-index:2000;display:none;align-items:center;justify-content:center;padding:24px}
@@ -444,31 +452,6 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 @keyframes draw{to{stroke-dashoffset:0}}
 .modal__success h3{font-family:var(--display);font-weight:700;font-size:24px;margin-bottom:10px}
 .modal__success p{color:var(--muted);margin-bottom:22px}
-
-/* ---------- МОДАЛКА КОНТАКТОВ ---------- */
-.modal__box--call{max-width:430px}
-.callm__head{margin-bottom:24px}
-.callm__head h3{font-family:var(--display);font-weight:700;font-size:25px;margin:6px 0 8px}
-.callm__head p{color:var(--muted);font-size:14px}
-.callm__btn{display:flex;align-items:center;gap:16px;padding:15px 16px;border-radius:16px;
-  border:1px solid var(--line-2);background:rgba(255,255,255,.02);margin-bottom:12px;
-  transition:transform .35s var(--ease),border-color .35s,background .35s}
-.callm__btn:last-child{margin-bottom:0}
-.callm__btn:hover{transform:translateY(-2px);border-color:var(--accent);background:rgba(232,137,58,.06)}
-.callm__btn:active{transform:scale(.99)}
-.callm__ic{width:50px;height:50px;border-radius:14px;flex:0 0 auto;display:flex;align-items:center;
-  justify-content:center;color:#fff}
-.callm__ic svg{width:26px;height:26px}
-.callm__btn--call .callm__ic{background:linear-gradient(135deg,var(--accent),var(--accent-deep));color:#1a120a;
-  box-shadow:0 8px 20px -6px var(--glow)}
-.callm__btn--wa .callm__ic{background:linear-gradient(135deg,#25d366,#15a850)}
-.callm__btn--tg .callm__ic{background:linear-gradient(135deg,#2aabee,#1d8fd1)}
-.callm__txt{flex:1;display:flex;flex-direction:column;line-height:1.2;min-width:0}
-.callm__txt b{font-size:16.5px;font-weight:700}
-.callm__txt i{font-style:normal;font-size:13px;color:var(--muted);margin-top:3px}
-.callm__arr{color:var(--muted-2);flex:0 0 auto;display:flex;transition:transform .3s,color .3s}
-.callm__btn:hover .callm__arr{transform:translateX(4px);color:var(--accent-2)}
-.callm__btn--call:hover .callm__arr{color:var(--accent-2)}
 
 /* ---------- COOKIE ---------- */
 .cookie{position:fixed;left:26px;bottom:26px;z-index:950;max-width:420px;display:flex;align-items:center;
@@ -541,11 +524,14 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   .hstat--price b{font-size:25px}        /* цена помещается в карточку, не обрезается */
   .hstat--price small{font-size:.46em}
   .lead,.modal__box{padding:26px}
-  .cookie{left:14px;right:14px;bottom:14px;max-width:none}
+  .cookie{left:12px;right:12px;bottom:12px;max-width:none}
   .audience{flex-direction:column;align-items:flex-start}
-  .footer__bottom{flex-direction:column;gap:8px;padding-bottom:96px}  /* место под плавающую кнопку */
-  .fab{width:54px;height:54px;right:18px;bottom:18px}
-  .cookie{bottom:84px}                                                /* не перекрывает FAB */
+  .footer__bottom{flex-direction:column;gap:8px;padding-right:78px;padding-bottom:22px}  /* текст не заходит под кнопки связи */
+  /* плавающие кнопки чуть меньше на телефоне */
+  .fab-btn{width:52px;height:52px}
+  .fab-btn svg{width:25px;height:25px}
+  /* пока показан cookie-баннер — поднимаем кнопки над ним, чтобы не перекрывались */
+  body.cookie-on .fab-stack{bottom:120px}
 }
 
 @media (prefers-reduced-motion:reduce){
