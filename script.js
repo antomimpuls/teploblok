@@ -112,7 +112,8 @@
         'Что строят / объём': data.comment || '—',
         _subject: 'Новая заявка с сайта vulkanblok.ru',
         _template: 'table',
-        _captcha: 'false'
+        _captcha: 'false',
+        _url: 'https://vulkanblok.ru/'   // обязательно: иначе FormSubmit не опознаёт форму при JS-отправке
       })
     });
     const json = await res.json().catch(() => ({}));
