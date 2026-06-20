@@ -156,6 +156,17 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .hero.in .reveal-line>span{transform:translateY(0)}
 .hero__sub{font-size:clamp(16px,1.9vw,20px);color:var(--muted);max-width:600px;margin-bottom:38px}
 .hero__cta{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:60px}
+/* hero-карточки преимуществ */
+.hero__feats{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;max-width:680px}
+.hfeat{display:flex;gap:14px;align-items:flex-start;padding:18px 20px;border:1px solid var(--line);
+  border-radius:var(--radius);background:rgba(255,255,255,.025);backdrop-filter:blur(8px);
+  transition:transform .4s var(--ease),border-color .4s,background .4s}
+.hfeat:hover{border-color:var(--accent);transform:translateY(-3px);background:rgba(232,137,58,.06)}
+.hfeat__ic{flex:0 0 auto;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;background:rgba(232,137,58,.15);border:1px solid var(--accent);color:var(--accent-2);margin-top:1px}
+.hfeat b{display:block;font-size:15.5px;font-weight:700;line-height:1.25}
+.hfeat i{display:block;font-style:normal;font-size:12.5px;color:var(--muted);margin-top:4px;line-height:1.35}
+
 .hero__stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:760px}
 .hstat{padding:22px 20px;border:1px solid var(--line);border-radius:var(--radius);
   background:rgba(255,255,255,.025);backdrop-filter:blur(8px);transition:.4s var(--ease)}
@@ -508,9 +519,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   .hero__stats{grid-template-columns:repeat(2,1fr)}
   .section{padding:84px 0}
   .hero{min-height:auto}
-  /* карточки статистики — плотный фон, чтобы текст читался поверх фото */
+  /* карточки преимуществ — плотный фон, чтобы текст читался поверх фото */
+  .hfeat{background:rgba(28,23,18,.72);backdrop-filter:blur(12px)}
   .hstat{background:rgba(28,23,18,.7);backdrop-filter:blur(12px)}
-  .hstat span i{color:var(--muted)}
   /* читаемость текста поверх фото на мобильном — затемняем сильнее и вертикально */
   .cta::before{background:linear-gradient(180deg,rgba(21,17,13,.82),rgba(21,17,13,.94))}
 }
@@ -518,11 +529,10 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   .container{padding:0 20px}
   .adv__grid,.adv__row,.catalog__grid,.steps,.footer__grid,.gallery__grid{grid-template-columns:1fr}
   .gitem--big{grid-column:span 1;grid-row:span 1}
+  .hero__feats{grid-template-columns:1fr;gap:10px}
+  .hfeat{padding:15px 16px}
   .hero__stats{grid-template-columns:1fr 1fr;gap:10px}
   .hstat{padding:18px 15px}
-  .hstat b{font-size:30px}
-  .hstat--price b{font-size:25px}        /* цена помещается в карточку, не обрезается */
-  .hstat--price small{font-size:.46em}
   .lead,.modal__box{padding:26px}
   .cookie{left:12px;right:12px;bottom:12px;max-width:none}
   .audience{flex-direction:column;align-items:flex-start}
