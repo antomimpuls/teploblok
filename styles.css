@@ -362,6 +362,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   background:rgba(0,0,0,.2);color:var(--text);font-size:15px;font-family:inherit;transition:.3s}
 .lead__field input::placeholder{color:var(--muted-2)}
 .lead__field input:focus{outline:none;border-color:var(--accent);background:rgba(232,137,58,.05)}
+.form-honey{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important}
 .lead .btn{margin-top:6px}
 .consent{display:flex;gap:10px;margin-top:16px;font-size:12.5px;color:var(--muted)}
 .consent input{margin-top:3px;accent-color:var(--accent);flex:0 0 auto}

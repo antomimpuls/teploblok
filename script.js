@@ -106,8 +106,13 @@
      Заявка уходит НА ПОЧТУ через FormSubmit (доставка в mail.ru проверена).
      Если отправка не удалась — подсказываем прямые способы связи. */
   const LEAD_ENDPOINT = 'https://formsubmit.co/ajax/89530857007@mail.ru';
+  const LEAD_COPY_EMAIL = 'antomimpuls@gmail.com';
 
   async function sendLead(data) {
+    const leadId = `VB-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
+    const submittedAt = new Date().toLocaleString('ru-RU', {
+      timeZone: 'Europe/Moscow', dateStyle: 'short', timeStyle: 'medium'
+    });
     const res = await fetch(LEAD_ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
@@ -115,9 +120,13 @@
         'Имя': data.name || '—',
         'Телефон': data.phone || '—',
         'Что строят / объём': data.comment || '—',
-        _subject: 'Новая заявка с сайта vulkanblok.ru',
+        _subject: `[vulkanblok.ru] Новая заявка ${leadId}`,
+        _cc: LEAD_COPY_EMAIL,
         _template: 'table',
         _captcha: 'false',
+        _honey: data.website || '',
+        'Номер заявки': leadId,
+        'Время заявки (МСК)': submittedAt,
         'Источник формы': window.vbLeadSource || 'форма на странице',
         'Страница': location.href,
         'UTM / yclid': window.vbAttributionString?.() || '—',

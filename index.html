@@ -426,14 +426,15 @@
     <form class="lead reveal js-lead" novalidate>
       <h3>Получить просчёт</h3>
       <div class="lead__field">
-        <input type="text" name="name" placeholder="Ваше имя" required>
+        <input type="text" name="name" placeholder="Ваше имя" required maxlength="80" autocomplete="name">
       </div>
       <div class="lead__field">
-        <input type="tel" name="phone" placeholder="Телефон" required inputmode="tel">
+        <input type="tel" name="phone" placeholder="Телефон" required inputmode="tel" maxlength="30" autocomplete="tel">
       </div>
       <div class="lead__field">
-        <input type="text" name="comment" placeholder="Что строите / нужный объём (необязательно)">
+        <input type="text" name="comment" placeholder="Что строите / нужный объём (необязательно)" maxlength="500">
       </div>
+      <input type="text" name="website" class="form-honey" tabindex="-1" autocomplete="off" aria-hidden="true">
       <button type="submit" class="btn btn--accent btn--full" data-cursor="link">Отправить заявку</button>
       <label class="consent">
         <input type="checkbox" name="consent" required>
@@ -544,9 +545,10 @@
       <h3>Рассчитать стоимость</h3>
       <p>Оставьте контакты — перезвоним, уточним детали и пришлём просчёт. Доставку рассчитаем отдельно под ваш адрес.</p>
       <form class="lead lead--modal js-lead" novalidate>
-        <div class="lead__field"><input type="text" name="name" placeholder="Ваше имя" required></div>
-        <div class="lead__field"><input type="tel" name="phone" placeholder="Телефон" required inputmode="tel"></div>
-        <div class="lead__field"><input type="text" name="comment" placeholder="Объём / что строите (необязательно)"></div>
+        <div class="lead__field"><input type="text" name="name" placeholder="Ваше имя" required maxlength="80" autocomplete="name"></div>
+        <div class="lead__field"><input type="tel" name="phone" placeholder="Телефон" required inputmode="tel" maxlength="30" autocomplete="tel"></div>
+        <div class="lead__field"><input type="text" name="comment" placeholder="Объём / что строите (необязательно)" maxlength="500"></div>
+        <input type="text" name="website" class="form-honey" tabindex="-1" autocomplete="off" aria-hidden="true">
         <button type="submit" class="btn btn--accent btn--full" data-cursor="link">Отправить заявку</button>
         <label class="consent">
           <input type="checkbox" name="consent" required>
@@ -576,6 +578,6 @@
   <button class="btn btn--accent btn--sm" id="cookieOk" data-cursor="link">Принять</button>
 </div>
 
-<script src="script.js?v=12"></script>
+<script src="script.js?v=13"></script>
 </body>
 </html>
