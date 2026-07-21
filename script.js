@@ -90,7 +90,12 @@
 
   /* ---------- МОДАЛКА ---------- */
   const modal = $('#modal');
-  const openModal = () => { modal.classList.add('open'); modal.classList.remove('success'); document.body.classList.add('no-scroll'); };
+  const openModal = (event) => {
+    modal.classList.add('open'); modal.classList.remove('success'); document.body.classList.add('no-scroll');
+    const source = event?.currentTarget?.textContent?.trim() || 'unknown';
+    window.vbLeadSource = source.slice(0, 80);
+    window.vbReachGoal?.('open_calc_modal', { source });
+  };
   const closeModal = () => { modal.classList.remove('open'); document.body.classList.remove('no-scroll'); };
   $$('.js-open-modal').forEach(b => b.addEventListener('click', openModal));
   $$('.js-close-modal').forEach(b => b.addEventListener('click', closeModal));
@@ -113,6 +118,10 @@
         _subject: 'Новая заявка с сайта vulkanblok.ru',
         _template: 'table',
         _captcha: 'false',
+        'Источник формы': window.vbLeadSource || 'форма на странице',
+        'Страница': location.href,
+        'UTM / yclid': window.vbAttributionString?.() || '—',
+        'Metrika ClientID': window.vbMetrikaClientId || '—',
         _url: 'https://vulkanblok.ru/'   // обязательно: иначе FormSubmit не опознаёт форму при JS-отправке
       })
     });
@@ -121,6 +130,12 @@
   }
 
   $$('.js-lead').forEach(form => {
+    let formStarted = false;
+    form.addEventListener('input', () => {
+      if (formStarted) return;
+      formStarted = true;
+      window.vbReachGoal?.('form_start', { source: window.vbLeadSource || form.closest('section')?.id || 'page' });
+    }, { passive: true });
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const phone = form.querySelector('[name=phone]');
@@ -133,11 +148,12 @@
       const data = Object.fromEntries(new FormData(form).entries());
       try {
         await sendLead(data);
+        window.vbReachGoal?.('form_submit_success', { source: window.vbLeadSource || form.closest('section')?.id || 'page' });
         form.reset();
-        const cb = form.querySelector('[name=consent]'); if (cb) cb.checked = true;
         if (form.classList.contains('lead--modal')) modal.classList.add('success');
         else toast('Заявка отправлена! Мы свяжемся с вами в ближайшее время.');
       } catch (err) {
+        window.vbReachGoal?.('form_error', { source: window.vbLeadSource || form.closest('section')?.id || 'page' });
         // не теряем клиента — подсказываем прямые способы связи (кнопки справа внизу)
         toast('Не получилось отправить. Позвоните +7 953 085-70-07 или напишите в WhatsApp / Telegram (кнопки справа внизу).');
       } finally {
