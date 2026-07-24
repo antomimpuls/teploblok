@@ -74,24 +74,6 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .btn--sm{padding:11px 20px;font-size:14px}
 .btn--full{width:100%}
 
-/* ---------- ПРЕЛОАДЕР ---------- */
-.preloader{position:fixed;inset:0;z-index:9999;background:var(--bg);
-  display:flex;align-items:center;justify-content:center;transition:opacity .6s ease,visibility .6s}
-.preloader.hide{opacity:0;visibility:hidden}
-.preloader__inner{text-align:center}
-.preloader__logo{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;width:64px;margin:0 auto 22px}
-.preloader__brick{height:26px;border-radius:5px;background:linear-gradient(120deg,var(--accent),var(--accent-deep));
-  opacity:0;animation:brick 1.4s var(--ease) infinite}
-.preloader__brick:nth-child(2){animation-delay:.15s}
-.preloader__brick:nth-child(3){animation-delay:.3s}
-.preloader__brick:nth-child(4){animation-delay:.45s}
-@keyframes brick{0%,100%{opacity:.15;transform:translateY(6px)}40%{opacity:1;transform:translateY(0)}}
-.preloader__text{font-family:var(--display);font-weight:700;letter-spacing:.2em;font-size:18px}
-.preloader__text span{color:var(--accent)}
-.preloader__bar{width:160px;height:2px;background:var(--line);margin:18px auto 0;border-radius:2px;overflow:hidden}
-.preloader__bar i{display:block;height:100%;width:0;background:var(--accent);animation:load 1.6s ease forwards}
-@keyframes load{to{width:100%}}
-
 /* ---------- ПРОГРЕСС СКРОЛЛА ---------- */
 .scroll-progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:8000;
   background:linear-gradient(90deg,var(--accent),var(--accent-2));box-shadow:0 0 12px var(--glow)}

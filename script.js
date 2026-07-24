@@ -7,13 +7,11 @@
   const $$ = (s, c = document) => [...c.querySelectorAll(s)];
   const reduce = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 
-  /* ---------- ПРЕЛОАДЕР ---------- */
-  window.addEventListener('load', () => {
-    const p = $('#preloader');
-    setTimeout(() => p && p.classList.add('hide'), 700);
+  /* ---------- ПЕРВЫЙ ЭКРАН ---------- */
+  window.addEventListener('DOMContentLoaded', () => {
     const hero = $('#hero');
     if (hero) requestAnimationFrame(() => hero.classList.add('in'));
-  });
+  }, { once: true });
 
   /* ---------- ШАПКА: фон при скролле + прогресс ---------- */
   const header = $('#header');
