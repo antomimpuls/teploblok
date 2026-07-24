@@ -308,6 +308,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
 /* ---------- ДОСТАВКА ---------- */
 .delivery{background:var(--bg-2)}
+.delivery__cities{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px;list-style:none}
+.delivery__cities li{padding:9px 14px;border:1px solid var(--line-2);border-radius:100px;
+  color:var(--text);background:rgba(232,137,58,.07);font-size:14px;font-weight:600}
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
 .step{padding:32px 26px;border-radius:var(--radius);border:1px solid var(--line);background:var(--bg-3);
   position:relative;transition:.4s var(--ease)}
@@ -518,6 +521,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   .hstat{padding:18px 15px}
   .lead,.modal__box{padding:26px}
   .cookie{left:12px;right:12px;bottom:12px;max-width:none}
+  .delivery__cities{gap:8px}
+  .delivery__cities li{padding:8px 11px;font-size:12.5px}
   .audience{flex-direction:column;align-items:flex-start}
   .footer__bottom{flex-direction:column;gap:8px;padding-right:78px;padding-bottom:22px}  /* текст не заходит под кнопки связи */
   /* плавающие кнопки чуть меньше на телефоне */
